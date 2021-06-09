@@ -25,12 +25,16 @@ app.use((error, req, res, next) => {
     return next(error)
   }
   res.status(error.code || 500)
-  res.json({ message: error.message || 'An unknown error occurred!' })
+  res.json({
+    status: false,
+    message: error.message || 'An unknown error occurred!'
+  })
 })
 
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@clusterudemy.wx7y6.gcp.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true
 }).then(() => {
   app.listen(process.env.API_PORT, () => console.log(`Server is running on port ${process.env.API_PORT}`))
 })

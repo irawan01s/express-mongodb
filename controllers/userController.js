@@ -21,30 +21,31 @@ exports.getUsers = async (req, res, next) => {
   }
   let users
   try {
-    users = await User.find(userStatement).then((u) => {
-      const birthDateFormat = moment(u.birthDate).format('YYYY-MM-DD')
-      delete u.phone
-      u.birthDate = birthDateFormat
-      // console.log(u)
-      return u
-    })
+    users = await User.find(userStatement).
+    // .then((u) => {
+    //   const birthDateFormat = moment(u.birthDate).format('YYYY-MM-DD')
+    //   delete u.phone
+    //   u.birthDate = birthDateFormat
+    //   // console.log(u)
+    //   return u
+    // })
   }
   catch (error) {
     const err = new HttpError(error, 400)
     return next(err)
   }
-  // const result = users.map((u) => {
-  //   const birthDateFormat = moment(u.birthDate).format('YYYY-MM-DD')
-  //   delete u.phone
-  //   // u.birthDate = birthDateFormat
-  //   // console.log(u)
-  //   return u
-  // })
+  const result = users.map((u) => {
+    const birthDateFormat = moment(u.birthDate).format('YYYY-MM-DD')
+    delete u.phone
+    u.birthDate = birthDateFormat
+    // console.log(u)
+    return u
+  })
   // console.log(result)
   res.status(200).json({
     status: true,
     message: 'success',
-    data: users
+    data: result
   })
 }
 
