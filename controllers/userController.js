@@ -21,7 +21,7 @@ exports.getUsers = async (req, res, next) => {
   }
   let users
   try {
-    users = await User.find(userStatement).
+    users = await User.find(userStatement)
     // .then((u) => {
     //   const birthDateFormat = moment(u.birthDate).format('YYYY-MM-DD')
     //   delete u.phone
