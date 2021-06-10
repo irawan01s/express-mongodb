@@ -1,4 +1,4 @@
-require('dotenv').config()
+// require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: false }))
 app.get('/', (req, res) => {
   res.status(200).json({
     status: true,
-    message: 'Success'
+    message: 'Success Express'
   })
 })
 app.use('/users', userRoutes)
@@ -41,9 +41,8 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PA
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
+}).catch((err) => {
+  console.log(err)
 })
-  .catch((err) => {
-    console.log(err)
-  })
 
-app.listen(process.env.API_PORT, () => console.log(`Server is running on port ${process.env.API_PORT}`))
+app.listen(process.env.PORT, () => console.log(`Server is running on port ${process.env.PORT}`))
