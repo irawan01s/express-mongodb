@@ -41,9 +41,9 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PA
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
-}).then(() => {
-  app.listen(process.env.API_PORT, () => console.log(`Server is running on port ${process.env.API_PORT}`))
 })
   .catch((err) => {
     console.log(err)
   })
+
+app.listen(process.env.API_PORT, () => console.log(`Server is running on port ${process.env.API_PORT}`))
