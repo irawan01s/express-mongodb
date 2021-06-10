@@ -89,16 +89,16 @@ exports.createUser = async (req, res, next) => {
 
   console.log(createdUser)
 
-  // try {
-  //   await createdUser.save()
-  // }
-  // catch (error) {
-  //   const err = new HttpError(error, 400)
-  //   return next(err)
-  // }
+  try {
+    await createdUser.save()
+  }
+  catch (error) {
+    const err = new HttpError(error, 400)
+    return next(err)
+  }
 
   res.status(201).json({
-    status: false,
+    status: true,
     message: 'Succsess',
     data: null
   })
